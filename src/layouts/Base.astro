@@ -1,0 +1,43 @@
+---
+/* The HTML shell: <head>, fonts, global styles, theme start-up, smooth scroll.
+   SEO tags (Open Graph, schema.org, canonical) will go in the <head> here later. */
+import '../styles/tokens.css'
+import '../styles/global.css'
+import { site } from '../config/site'
+
+interface Props { title?: string; description?: string }
+const { title = site.title, description = site.description } = Astro.props
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#151314" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,500&display=swap" rel="stylesheet" />
+    <!-- apply saved theme before paint so there is no flash -->
+    <script is:inline>if (localStorage.getItem('theme') === 'light') document.documentElement.dataset.theme = 'light'</script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<script>
+  import { getLenis, goTo, markReady } from '../lib/motion'
+  getLenis()
+  // in-page links (#about, #contact...) use smooth scroll
+  document.addEventListener('click', (e) => {
+    const a = (e.target as Element).closest('a[href^="#"]')
+    if (!a) return
+    e.preventDefault()
+    dispatchEvent(new Event('site:navigate'))
+    goTo(a.getAttribute('href')!)
+  })
+  // no Loader on the page: mark ready right away
+  if (!document.getElementById('loader')) markReady()
+</script>

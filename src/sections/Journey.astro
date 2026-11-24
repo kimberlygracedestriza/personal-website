@@ -1,0 +1,123 @@
+---
+/* SECTION: journey. Timeline of polaroids and cards linked by a road that draws itself on scroll,
+   with your avatar travelling along it.
+   Remove: delete its line in src/config/sections.ts (and this file). */
+import { site } from '../config/site'
+import Squiggle from '../components/Squiggle.astro'
+
+interface Props { id: string }
+const { id } = Astro.props
+
+const steps = [
+  { year: '2025', title: 'Freelance studio', org: 'Self-employed', text: 'Building websites for small businesses in the US, Australia and the Philippines.', photo: '/img/photo-1.svg', note: 'my own studio!' },
+  { year: '2023', title: 'WordPress Developer', org: '[CONFIRM: company]', text: 'Built and maintained client sites on WordPress and WooCommerce.', photo: '/img/photo-2.svg', note: 'learned so much' },
+  { year: '2021', title: 'First client site', org: 'Freelance', text: 'Designed and launched my first paid website.', photo: '/img/photo-3.svg', note: 'where it started' },
+  { year: '2019', title: 'Degree', org: '[CONFIRM: school]', text: '[CONFIRM: course and honors]', photo: '/img/photo-4.svg', note: 'study era' },
+]
+---
+<section class="journey section" id={id}>
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="pill">My journey</span>
+      <h2 class="h2">The story <span class="hl">so far<Squiggle /></span></h2>
+      <p class="note sec-note">follow the road</p>
+    </div>
+    <ol class="jr-list">
+      <svg class="jr-map" aria-hidden="true"><path class="jr-road" /><path class="jr-trail" /></svg>
+      <span class="jr-walker" aria-hidden="true"><img src={site.avatar} alt="" /></span>
+      {steps.map((j, i) => (
+        <li class:list={['jr-item', { flip: i % 2 }]}>
+          <figure class="polaroid" style={`--r:${i % 2 ? 4 : -4}deg`}>
+            <span class="tape"></span>
+            <img src={j.photo} alt="" loading="lazy" />
+            <figcaption class="note">{j.note}</figcaption>
+          </figure>
+          <span class="jr-dot"></span>
+          <div class="jr-card">
+            <span class="jr-year note">{j.year}</span>
+            <h3>{j.title}</h3>
+            <span class="jr-org">{j.org}</span>
+            <p>{j.text}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .jr-list { position: relative; }
+  .jr-map { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; z-index: 0; }
+  .jr-road, .jr-trail { fill: none; stroke-linecap: round; stroke-width: 4; }
+  .jr-road { stroke: var(--blush); stroke-dasharray: 2 12; }
+  .jr-trail { stroke: var(--rose); }
+  .jr-walker { position: absolute; left: 0; top: 0; z-index: 3; width: 48px; height: 48px; margin: -24px 0 0 -24px; border-radius: 50%; padding: 3px; background: conic-gradient(var(--rose), var(--blush), var(--rose)); box-shadow: 0 10px 24px -6px rgba(185, 121, 139, 0.7); will-change: transform; pointer-events: none; }
+  .jr-walker img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 2px solid var(--surface); }
+  .jr-item { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 70px 1fr; grid-template-areas: 'photo dot card'; align-items: center; margin-bottom: clamp(50px, 9vh, 90px); }
+  .jr-item.flip { grid-template-areas: 'card dot photo'; }
+  .polaroid { grid-area: photo; justify-self: end; position: relative; width: min(320px, 100%); padding: 12px 12px 14px; background: var(--surface); box-shadow: var(--shadow); transform: rotate(var(--r)); transition: transform 0.5s var(--ease); }
+  .flip .polaroid { justify-self: start; }
+  .polaroid:hover { transform: rotate(0) scale(1.03); }
+  .polaroid img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+  .polaroid figcaption { text-align: center; margin-top: 8px; color: var(--ink); }
+  .tape { position: absolute; top: -14px; left: 50%; width: 110px; height: 30px; margin-left: -55px; background: rgba(221, 184, 194, 0.8); transform: rotate(-4deg); box-shadow: 0 2px 6px rgba(58, 42, 47, 0.08); }
+  .jr-dot { grid-area: dot; justify-self: center; width: 22px; height: 22px; border-radius: 50%; background: var(--rose); border: 5px solid var(--surface); box-shadow: 0 0 0 6px var(--blush-soft); z-index: 1; }
+  .jr-card { grid-area: card; max-width: 420px; padding: 26px 28px; border-radius: 26px; background: var(--surface); box-shadow: var(--shadow); border: 1px solid var(--line); }
+  .flip .jr-card { justify-self: end; }
+  .jr-year { display: block; line-height: 1; }
+  .jr-card h3 { font-family: var(--display); font-weight: 800; font-size: var(--fs-md); line-height: 1.15; margin-top: 8px; }
+  .jr-org { display: block; font-weight: 600; margin-top: 4px; }
+  .jr-card p { color: var(--muted); margin-top: 8px; }
+
+  @media (max-width: 760px) {
+    .jr-item, .jr-item.flip { grid-template-columns: 34px 1fr; grid-template-areas: 'dot photo' 'dot card'; gap: 16px 0; }
+    .jr-dot { align-self: start; margin-top: 8px; }
+    .polaroid, .flip .polaroid { justify-self: start; width: 74%; }
+    .jr-card, .flip .jr-card { justify-self: stretch; }
+  }
+</style>
+
+<script>
+  import { gsap, ScrollTrigger } from '../lib/motion'
+  const list = document.querySelector<HTMLElement>('.jr-list')!
+  const map = list.querySelector('.jr-map')!
+  const road = list.querySelector('.jr-road')!
+  const trail = list.querySelector<SVGPathElement>('.jr-trail')!
+  const walker = list.querySelector<HTMLElement>('.jr-walker')!
+  let st: ScrollTrigger | undefined
+
+  function buildRoad() {
+    const r = list.getBoundingClientRect()
+    const pts = [...list.querySelectorAll('.jr-dot')].map((el) => { const b = el.getBoundingClientRect(); return [b.left - r.left + b.width / 2, b.top - r.top + b.height / 2] })
+    if (!pts.length) return
+    const amp = innerWidth < 760 ? 22 : Math.min(260, r.width * 0.2)
+    let prev = [pts[0][0], 0]
+    let d = `M ${prev[0]} 0 `
+    pts.concat([[pts[pts.length - 1][0], r.height]]).forEach((p, i) => {
+      const dir = i % 2 ? 1 : -1, dy = (p[1] - prev[1]) / 2
+      d += `C ${prev[0] + amp * dir} ${prev[1] + dy}, ${p[0] + amp * dir} ${p[1] - dy}, ${p[0]} ${p[1]} `
+      prev = p
+    })
+    map.setAttribute('width', String(r.width)); map.setAttribute('height', String(r.height))
+    map.setAttribute('viewBox', `0 0 ${r.width} ${r.height}`)
+    road.setAttribute('d', d); trail.setAttribute('d', d)
+    const len = trail.getTotalLength()
+    trail.style.strokeDasharray = String(len)
+    const place = (p: number) => {
+      trail.style.strokeDashoffset = String(len * (1 - p))
+      const pt = trail.getPointAtLength(len * p)
+      walker.style.transform = `translate(${pt.x}px, ${pt.y}px)`
+    }
+    st?.kill()
+    st = ScrollTrigger.create({ trigger: list, start: 'top 65%', end: 'bottom 65%', scrub: 0.4, onUpdate: (s) => place(s.progress) })
+    place(st.progress)
+  }
+  new ResizeObserver(buildRoad).observe(list)
+
+  list.querySelectorAll('.jr-item').forEach((it, i) => {
+    gsap.timeline({ scrollTrigger: { trigger: it, start: 'top 78%' } })
+      .from(it.querySelector('.polaroid'), { y: 60, rotate: i % 2 ? 14 : -14, scale: 0.8, opacity: 0, duration: 1.1, ease: 'back.out(1.6)' })
+      .from(it.querySelector('.jr-card'), { x: i % 2 ? -50 : 50, opacity: 0, duration: 1 }, 0.15)
+      .from(it.querySelector('.jr-dot'), { scale: 0, duration: 0.6, ease: 'back.out(3)' }, 0.1)
+  })
+</script>

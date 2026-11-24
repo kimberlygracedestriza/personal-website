@@ -1,0 +1,53 @@
+/* Design tokens: colors, fonts, sizes. Change these to re-theme the whole site.
+   Dark is the default; [data-theme="light"] is the white version. */
+:root {
+  --bg: #151314;
+  --tint: #1C191B;
+  --surface: #232022;
+  --surface-2: #2A2629;
+  --nav-glass: rgba(21, 19, 20, 0.86);
+  --blush: #DDB8C2;
+  --blush-soft: #2E2A2C;
+  --rose: #DDB8C2;
+  --rose-d: #DDB8C2;
+  --on-rose: #1E1A1C;
+  --ink: #F4EFF1;
+  --white: #FFFFFF;
+  --muted: rgba(244, 239, 241, 0.68);
+  --line: rgba(255, 255, 255, 0.1);
+  --mesh-1: rgba(221, 184, 194, 0.20);
+  --mesh-2: rgba(185, 121, 139, 0.16);
+  --mesh-3: rgba(243, 227, 232, 0.10);
+  --mesh-4: rgba(221, 184, 194, 0.12);
+  --shadow: 0 18px 50px -18px rgba(0, 0, 0, 0.6), 0 2px 6px rgba(0, 0, 0, 0.2);
+  --shadow-rose: 0 18px 40px -14px rgba(185, 121, 139, 0.6);
+  --display: 'Outfit', system-ui, sans-serif;
+  --body: 'Plus Jakarta Sans', system-ui, sans-serif;
+  /* uniform type scale: only these five sizes are used */
+  --fs-xs: 14px;
+  --fs-base: 16px;
+  --fs-md: 22px;
+  --fs-lg: clamp(40px, 5vw, 64px);
+  --fs-xl: clamp(48px, 6.5vw, 96px);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --gx: clamp(18px, 4vw, 56px);
+}
+[data-theme="light"] {
+  --bg: #FFFFFF;
+  --tint: #FBF2F5;
+  --surface: #FFFFFF;
+  --surface-2: #FFFCFD;
+  --nav-glass: rgba(255, 255, 255, 0.86);
+  --blush-soft: #F3E3E8;
+  --rose: #B9798B;
+  --rose-d: #94566A;
+  --on-rose: #FFFFFF;
+  --ink: #3A2A2F;
+  --muted: rgba(58, 42, 47, 0.66);
+  --line: rgba(58, 42, 47, 0.1);
+  --mesh-1: rgba(221, 184, 194, 0.55);
+  --mesh-2: rgba(243, 227, 232, 0.95);
+  --mesh-3: rgba(185, 121, 139, 0.22);
+  --mesh-4: rgba(221, 184, 194, 0.38);
+  --shadow: 0 18px 50px -18px rgba(58, 42, 47, 0.18), 0 2px 6px rgba(58, 42, 47, 0.04);
+}

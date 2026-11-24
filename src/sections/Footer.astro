@@ -1,0 +1,23 @@
+---
+/* SECTION: footer. Copyright and "Back to top".
+   Remove: delete its line in src/config/sections.ts (and this file). */
+import { site } from '../config/site'
+
+interface Props { id: string }
+const { id } = Astro.props
+const year = new Date().getFullYear()
+---
+<footer class="footer" id={id}>
+  <div class="wrap foot">
+    <span>&copy; {year} {site.full}</span>
+    <a href="#top">Back to top</a>
+  </div>
+</footer>
+
+<style>
+  .footer { background: var(--tint); }
+  .foot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; padding-block: 34px 24px; font-size: var(--fs-xs); color: var(--muted); }
+  .foot a { font-weight: 600; transition: color 0.3s; }
+  .foot a:hover { color: var(--rose-d); }
+  @media (max-width: 760px) { .foot { justify-content: center; text-align: center; } }
+</style>

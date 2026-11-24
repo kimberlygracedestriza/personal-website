@@ -1,0 +1,1 @@
+import{s as e}from"./motion.C1Yswhnh.js";document.querySelectorAll(`[data-squiggle="scroll"] path`).forEach(t=>e.to(t,{strokeDashoffset:0,duration:1.2,ease:`power2.inOut`,scrollTrigger:{trigger:t.closest(`h2`)??t,start:`top 80%`}}));

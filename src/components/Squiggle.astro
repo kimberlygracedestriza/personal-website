@@ -1,0 +1,20 @@
+---
+/* Hand-drawn underline. Put it inside a `.hl` span. It draws itself when scrolled into view.
+   manual = true: the parent animates it instead (used by the hero). */
+interface Props { manual?: boolean }
+const { manual = false } = Astro.props
+---
+<svg class="squiggle" data-squiggle={manual ? 'manual' : 'scroll'} viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M2 14 C 30 2, 50 24, 80 12 S 130 2, 160 13 S 215 24, 245 11 S 285 4, 298 12" pathLength="1" />
+</svg>
+
+<style is:global>
+  .squiggle { position: absolute; left: -2%; width: 104%; bottom: -0.16em; height: 0.26em; overflow: visible; }
+  .squiggle path { fill: none; stroke: var(--rose-d); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; vector-effect: non-scaling-stroke; }
+</style>
+
+<script>
+  import { gsap } from '../lib/motion'
+  document.querySelectorAll('[data-squiggle="scroll"] path').forEach((p) =>
+    gsap.to(p, { strokeDashoffset: 0, duration: 1.2, ease: 'power2.inOut', scrollTrigger: { trigger: p.closest('h2') ?? p, start: 'top 80%' } }))
+</script>

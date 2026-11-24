@@ -1,0 +1,33 @@
+{
+  "name": "Kim Grace Destriza",
+  "wordmark": "KIM GRACE",
+  "tagline": "Web designer and WordPress developer",
+  "fonts": {
+    "headings": { "family": "Outfit", "weights": ["600 SemiBold", "700 Bold", "800 ExtraBold"], "download": "https://fonts.google.com/specimen/Outfit" },
+    "body": { "family": "Plus Jakarta Sans", "weights": ["400 Regular", "500 Medium", "700 Bold"], "download": "https://fonts.google.com/specimen/Plus+Jakarta+Sans" }
+  },
+  "colors": {
+    "blush": { "hex": "#DDB8C2", "rgb": "221, 184, 194", "use": "Signature color (from the coat). Accents, highlights, dark-mode buttons." },
+    "rose": { "hex": "#B9798B", "rgb": "185, 121, 139", "use": "Buttons and highlights on white." },
+    "deep_rose": { "hex": "#94566A", "rgb": "148, 86, 106", "use": "Accent text on white backgrounds." },
+    "blush_mist": { "hex": "#F3E3E8", "rgb": "243, 227, 232", "use": "Soft light backgrounds, shapes." },
+    "white": { "hex": "#FFFFFF", "rgb": "255, 255, 255", "use": "Light background, text on rose." },
+    "charcoal": { "hex": "#151314", "rgb": "21, 19, 20", "use": "Dark background (default site mode)." },
+    "charcoal_card": { "hex": "#232022", "rgb": "35, 32, 34", "use": "Cards and panels on dark." },
+    "ink": { "hex": "#3A2A2F", "rgb": "58, 42, 47", "use": "Main text on white." },
+    "off_white": { "hex": "#F4EFF1", "rgb": "244, 239, 241", "use": "Main text on dark." }
+  },
+  "pairings": [
+    { "background": "#151314", "text": "#F4EFF1", "accent": "#DDB8C2", "mode": "dark" },
+    { "background": "#FFFFFF", "text": "#3A2A2F", "accent": "#B9798B", "mode": "light" },
+    { "background": "#DDB8C2", "text": "#1E1A1C", "accent": "#FFFFFF", "mode": "blush card" }
+  ],
+  "video_type_sizes_1080p": {
+    "title": "Outfit ExtraBold, 110 to 140 px",
+    "subtitle": "Outfit SemiBold, 56 to 64 px",
+    "captions": "Plus Jakarta Sans Bold, 52 to 60 px",
+    "lower_third_name": "Outfit ExtraBold, 48 px, all caps (KIM GRACE)",
+    "lower_third_role": "Plus Jakarta Sans Medium, 30 px"
+  },
+  "style": ["Rounded shapes (pill buttons, 24 to 44 px corners)", "Soft wavy edges and hand-drawn squiggle underlines", "Friendly and warm, not corporate", "No emojis or decorative symbols"]
+}

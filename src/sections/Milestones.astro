@@ -1,0 +1,107 @@
+---
+/* SECTION: milestones. Certificate wall, then four big numbers that roll into place.
+   Remove: delete its line in src/config/sections.ts (and this file). */
+import Squiggle from '../components/Squiggle.astro'
+import Wave from '../components/Wave.astro'
+
+interface Props { id: string }
+const { id } = Astro.props
+
+const certificates = [
+  ['WordPress Development', 'Issuer placeholder'],
+  ['UI/UX Design', 'Issuer placeholder'],
+  ['Google Analytics', 'Google'],
+  ['SEO Fundamentals', 'Issuer placeholder'],
+  ['Figma Essentials', 'Issuer placeholder'],
+  ['WooCommerce', 'Issuer placeholder'],
+  ['Web Accessibility', 'Issuer placeholder'],
+  ['Digital Marketing', 'Issuer placeholder'],
+]
+const numbers = [
+  { label: 'Websites', note: 'launched', value: 40, suffix: '+' },
+  { label: 'Clients', note: 'served', value: 30, suffix: '+' },
+  { label: 'Projects', note: 'on time', value: 98, suffix: '%' },
+  { label: 'Reviews', note: 'five stars', value: 25, suffix: '+' },
+]
+const initials = (t: string) => t.split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase()
+const tilt = [-2, 1.5, -1, 2]
+---
+<section class="milestones section" id={id}>
+  <Wave flip />
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="pill">Milestones</span>
+      <h2 class="h2">Certificate <span class="hl">wall<Squiggle /></span></h2>
+    </div>
+    <div class="ms-wall">
+      {certificates.map(([t, by], i) => (
+        <figure class="cert-frame" style={`--r:${tilt[i % 4]}deg`}>
+          <span class="cert-border">
+            <span class="cert-logo">{initials(by)}</span>
+            <b>{t}</b>
+            <span class="cert-by">{by}</span>
+          </span>
+        </figure>
+      ))}
+    </div>
+
+    <div class="sec-head center ms-nums-head">
+      <h2 class="h2">By the <span class="hl">numbers<Squiggle /></span></h2>
+    </div>
+    <div class="nums">
+      {numbers.map((s) => (
+        <div class="num-cell">
+          <div class="num-val">
+            <span class="odo" aria-label={String(s.value)}>
+              {String(s.value).split('').map((c) => /\d/.test(c)
+                ? <span class="odo-win" aria-hidden="true"><span class="odo-col" data-d={c}>{[...Array(20)].map((_, k) => <span>{k % 10}</span>)}</span></span>
+                : <span aria-hidden="true">{c}</span>)}
+            </span>
+            <small>{s.suffix}</small>
+          </div>
+          <i class="num-line"></i>
+          <div class="num-meta"><b>{s.label}</b></div>
+          <span class="num-note">{s.note}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .ms-wall { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+  .cert-frame { margin: 0; padding: 10px; background: var(--surface); border-radius: 6px; box-shadow: var(--shadow); rotate: var(--r); transition: rotate 0.5s var(--ease), translate 0.5s var(--ease); }
+  .cert-frame:hover { rotate: 0deg; translate: 0 -6px; }
+  .cert-border { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-align: center; min-height: 170px; padding: 22px 14px 30px; border: 2px solid var(--blush); outline: 1px solid var(--blush); outline-offset: -7px; background: var(--surface-2); }
+  .cert-logo { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--blush-soft); color: var(--rose-d); font-family: var(--display); font-weight: 800; font-size: var(--fs-xs); }
+  .cert-border b { font-family: var(--display); font-weight: 700; font-size: var(--fs-base); line-height: 1.25; }
+  .cert-by { font-size: var(--fs-xs); color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+  .ms-nums-head { margin-top: clamp(90px, 13vh, 150px); }
+  .nums { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(24px, 4vw, 64px); }
+  .num-cell { display: flex; flex-direction: column; }
+  .num-val { display: flex; align-items: flex-start; font-family: var(--display); font-weight: 800; font-size: var(--fs-lg); line-height: 1; color: var(--ink); }
+  .num-val small { font-size: 0.5em; color: var(--rose); margin: 0.1em 0 0 0.06em; }
+  .num-line { display: block; height: 3px; margin: 18px 0 14px; border-radius: 3px; background: var(--rose); transform-origin: 0 50%; }
+  .num-meta b { font-family: var(--display); font-weight: 800; font-size: var(--fs-md); }
+  .num-note { font-size: var(--fs-xs); color: var(--muted); margin-top: 2px; }
+  .odo { display: inline-flex; }
+  .odo-win { display: inline-block; height: 1em; overflow: hidden; }
+  .odo-col { display: flex; flex-direction: column; will-change: transform; }
+  .odo-col span { height: 1em; line-height: 1; text-align: center; }
+
+  @media (max-width: 1000px) {
+    .nums { grid-template-columns: 1fr 1fr; row-gap: 44px; }
+    .ms-wall { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+
+<script>
+  import { gsap } from '../lib/motion'
+  gsap.from('.cert-frame', { y: 50, rotate: (i: number) => (i % 2 ? 8 : -8), opacity: 0, stagger: 0.06, duration: 0.9, ease: 'back.out(1.6)', scrollTrigger: { trigger: '.ms-wall', start: 'top 85%' } })
+  const tl = gsap.timeline({ scrollTrigger: { trigger: '.nums', start: 'top 82%' } })
+  tl.from('.num-cell', { y: 40, opacity: 0, stagger: 0.12, duration: 0.8, ease: 'power3.out' })
+  document.querySelectorAll<HTMLElement>('.nums .odo-col').forEach((col, i) =>
+    tl.fromTo(col, { yPercent: 0 }, { yPercent: -((10 + +col.dataset.d!) / 20) * 100, duration: 2.2, ease: 'power4.out' }, 0.15 + i * 0.05))
+  tl.from('.num-line', { scaleX: 0, stagger: 0.12, duration: 1.2, ease: 'expo.inOut' }, 0.4)
+    .from('.num-meta, .num-note', { y: 12, opacity: 0, stagger: 0.08, duration: 0.6 }, 0.9)
+</script>

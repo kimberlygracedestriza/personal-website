@@ -1,0 +1,41 @@
+---
+/* FEATURE: intro loader (avatar, bubble, progress bar). Fires "site ready" when done.
+   Remove: delete <Loader /> in src/pages/index.astro and this file. The page then starts instantly. */
+import { site } from '../config/site'
+---
+<div class="loader" id="loader" role="status" aria-label="Loading">
+  <div class="ld-stack">
+    <span class="ld-bubble note">hi, it's {site.name}!</span>
+    <img class="ld-face" src={site.avatar} alt="" />
+    <div class="ld-bar"><i></i></div>
+  </div>
+</div>
+
+<style>
+  .loader { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; background: var(--blush-soft); }
+  .ld-stack { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+  .ld-face { width: 128px; height: 128px; border-radius: 50%; object-fit: cover; border: 6px solid var(--surface); box-shadow: var(--shadow); }
+  .ld-bubble { position: relative; background: var(--surface); padding: 4px 18px; border-radius: 18px; box-shadow: var(--shadow); }
+  .ld-bubble::after { content: ''; position: absolute; left: 50%; bottom: -8px; width: 16px; height: 16px; background: var(--surface); transform: translateX(-50%) rotate(45deg); border-radius: 3px; }
+  .ld-bar { width: 170px; height: 6px; border-radius: 6px; background: var(--surface); overflow: hidden; }
+  .ld-bar i { display: block; height: 100%; background: var(--rose); transform-origin: 0 50%; border-radius: inherit; }
+</style>
+
+<script>
+  import { gsap, getLenis, markReady } from '../lib/motion'
+  const L = document.getElementById('loader')!
+  getLenis().stop()
+  gsap.fromTo('.ld-face', { scale: 0, rotate: -20 }, { scale: 1, rotate: 0, duration: 1.2, ease: 'elastic.out(1, 0.55)' })
+  gsap.fromTo('.ld-bubble', { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, delay: 0.5, duration: 0.8, ease: 'back.out(2.5)' })
+  gsap.fromTo('.ld-bar i', { scaleX: 0 }, { scaleX: 0.85, duration: 2, ease: 'power2.out' })
+  const t0 = performance.now()
+  const loaded = new Promise((r) => (document.readyState === 'complete' ? r(0) : addEventListener('load', r)))
+  Promise.all([document.fonts.ready, loaded]).then(() => setTimeout(() => {
+    gsap.timeline()
+      .to('.ld-bar i', { scaleX: 1, duration: 0.3 })
+      .to('.ld-face, .ld-bubble, .ld-bar', { scale: 0.6, opacity: 0, duration: 0.4, stagger: 0.05, ease: 'back.in(2)' })
+      .add(markReady)
+      .to(L, { yPercent: -100, duration: 0.9, ease: 'expo.inOut' }, '-=0.1')
+      .set(L, { display: 'none' })
+  }, Math.max(0, 1500 - (performance.now() - t0))))
+</script>

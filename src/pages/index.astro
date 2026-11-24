@@ -1,0 +1,20 @@
+---
+/* Home page. Site-wide features are listed here; page sections come from src/config/sections.ts.
+   To remove a site-wide feature: delete its line below and its file in src/features/. */
+import Base from '../layouts/Base.astro'
+import Loader from '../features/Loader.astro'
+import Nav from '../features/Nav.astro'
+import { sections } from '../config/sections'
+
+const files = import.meta.glob<{ default: any }>('../sections/*.astro', { eager: true })
+const list = sections
+  .map((s) => ({ ...s, Comp: files[`../sections/${s.file}.astro`]?.default }))
+  .filter((s) => s.Comp)
+---
+<Base>
+  <Loader />
+  <Nav />
+  <main>
+    {list.map(({ Comp, id }) => <Comp id={id} />)}
+  </main>
+</Base>

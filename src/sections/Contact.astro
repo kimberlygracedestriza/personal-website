@@ -1,0 +1,81 @@
+---
+/* SECTION: contact. Blush card with email (plus copy button), links and your cut-out photo.
+   Remove: delete its line in src/config/sections.ts (and this file). */
+import { site } from '../config/site'
+import Wave from '../components/Wave.astro'
+
+interface Props { id: string }
+const { id } = Astro.props
+---
+<section class="contact section tint" id={id}>
+  <Wave flip />
+  <div class="wrap">
+    <div class="ct-card">
+      <div class="ct-copy">
+        <span class="pill pill-light">Contact</span>
+        <h2 class="h2">Let's<br />collaborate</h2>
+        <p>Need a website, redesign, booking system, portal or dashboard? My inbox is always open, and I usually reply within a day.</p>
+        <div class="ct-mail">
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+          <button class="ct-copy-btn" data-email={site.email}>Copy</button>
+        </div>
+        <div class="ct-links">
+          <a class="btn btn-white" href={`mailto:${site.email}?subject=Hi%20${encodeURIComponent(site.name)}!`}>Send an email</a>
+          <a class="btn btn-ghost" href={site.github} target="_blank" rel="noreferrer">GitHub</a>
+          <a class="btn btn-ghost" href={site.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+        </div>
+      </div>
+      <div class="ct-media">
+        <span class="ct-bubble note">say hi!</span>
+        <img class="ct-sticker" src={site.photo} alt={`${site.name} smiling`} loading="lazy" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact { padding-bottom: 40px; }
+  .ct-card {
+    position: relative; margin-top: 8vh; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); gap: 2vw;
+    padding: clamp(32px, 5vw, 72px); border-radius: 44px; background: var(--rose); color: var(--on-rose);
+    box-shadow: 0 40px 90px -40px rgba(185, 121, 139, 0.9);
+  }
+  .ct-card::before { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: radial-gradient(50% 70% at 85% 100%, rgba(243, 227, 232, 0.4), transparent 70%); }
+  .ct-copy { position: relative; z-index: 1; }
+  .ct-copy p { margin-top: 16px; max-width: 28em; opacity: 0.95; }
+  .ct-mail { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 30px; }
+  .ct-mail a { font-family: var(--display); font-weight: 700; font-size: var(--fs-md); border-bottom: 3px solid var(--on-rose); padding-bottom: 2px; word-break: break-all; }
+  .ct-mail button { height: 34px; padding: 0 14px; border-radius: 99px; border: 1.5px solid var(--on-rose); font-size: var(--fs-xs); font-weight: 600; transition: background 0.3s, color 0.3s; }
+  .ct-mail button:hover { background: var(--on-rose); color: var(--rose); }
+  .ct-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+  .ct-media { position: relative; min-height: 300px; }
+  .ct-sticker { position: absolute; right: -4%; bottom: calc(-1 * clamp(32px, 5vw, 72px)); height: 138%; width: auto; max-width: none; filter: drop-shadow(0 20px 30px rgba(58, 42, 47, 0.25)); transform-origin: 50% 100%; }
+  .ct-bubble { position: absolute; z-index: 2; left: -6%; top: -16%; padding: 6px 18px; border-radius: 20px; background: var(--surface); color: var(--ink); box-shadow: var(--shadow); transform: rotate(-6deg); }
+  .ct-bubble::after { content: ''; position: absolute; right: 24px; bottom: -8px; width: 16px; height: 16px; background: var(--surface); transform: rotate(45deg); border-radius: 3px; }
+
+  @media (max-width: 760px) {
+    .ct-card { grid-template-columns: 1fr; margin-top: 4vh; }
+    .ct-media { min-height: 360px; }
+    .ct-sticker { right: 50%; translate: 50% 0; height: 110%; }
+    .ct-bubble { left: 4%; top: 2%; }
+  }
+</style>
+
+<script>
+  import { gsap } from '../lib/motion'
+  gsap.timeline({ scrollTrigger: { trigger: '.contact', start: 'top 70%' } })
+    .from('.ct-card', { y: 80, scale: 0.94, opacity: 0, duration: 1.1 })
+    .from('.ct-sticker', { yPercent: 40, rotate: 10, opacity: 0, duration: 1.1, ease: 'back.out(1.5)' }, 0.25)
+    .from('.ct-bubble', { scale: 0, duration: 0.7, ease: 'back.out(3)' }, 0.9)
+    .from('.ct-copy > *', { y: 30, opacity: 0, stagger: 0.08, duration: 0.9 }, 0.3)
+  gsap.to('.ct-sticker', { rotate: 2, duration: 2.4, yoyo: true, repeat: -1, ease: 'sine.inOut', transformOrigin: '50% 100%' })
+
+  const btn = document.querySelector<HTMLButtonElement>('.ct-copy-btn')!
+  btn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(btn.dataset.email!)
+      btn.textContent = 'Copied'
+      setTimeout(() => (btn.textContent = 'Copy'), 1800)
+    } catch {}
+  })
+</script>

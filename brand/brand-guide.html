@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KIM GRACE | Brand Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 16px; line-height: 1.6; color: #3A2A2F; background: #FFFFFF; padding: 56px clamp(20px, 5vw, 72px); max-width: 1200px; margin: 0 auto; }
+  h1, h2, h3 { font-family: 'Outfit', sans-serif; font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; }
+  h1 { font-size: 64px; }
+  h2 { font-size: 32px; margin: 64px 0 20px; }
+  h3 { font-size: 22px; }
+  .muted { color: rgba(58, 42, 47, 0.66); }
+  .squig { color: #B9798B; }
+  section + section { border-top: 1px solid rgba(58, 42, 47, 0.1); }
+  .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+  .sw { border-radius: 22px; overflow: hidden; border: 1px solid rgba(58, 42, 47, 0.1); }
+  .sw i { display: block; height: 120px; }
+  .sw div { padding: 14px 16px; font-size: 14px; }
+  .sw b { display: block; font-family: 'Outfit'; font-size: 16px; }
+  .pair { border-radius: 28px; padding: 32px; min-height: 200px; display: flex; flex-direction: column; justify-content: space-between; }
+  .pair .t { font-family: 'Outfit'; font-weight: 800; font-size: 40px; line-height: 1; }
+  .pill { display: inline-block; padding: 8px 18px; border-radius: 99px; font-family: 'Outfit'; font-weight: 600; font-size: 14px; }
+  .font-card { border-radius: 22px; padding: 28px; background: #F3E3E8; }
+  .font-card .big { font-size: 56px; line-height: 1.1; margin: 8px 0; }
+  .lt-wrap { border-radius: 24px; background: #151314; aspect-ratio: 16 / 9; position: relative; overflow: hidden; }
+  .lt { position: absolute; left: 6%; bottom: 10%; display: flex; flex-direction: column; gap: 4px; padding: 16px 26px; border-radius: 20px; background: #DDB8C2; color: #1E1A1C; }
+  .lt b { font-family: 'Outfit'; font-weight: 800; font-size: 28px; letter-spacing: 0.02em; line-height: 1; }
+  .lt span { font-size: 16px; font-weight: 500; }
+  .cap { position: absolute; left: 50%; top: 40%; translate: -50% 0; font-weight: 700; font-size: 26px; color: #F4EFF1; text-align: center; }
+  .cap em { font-style: normal; color: #DDB8C2; }
+  ul { padding-left: 20px; }
+  li { margin: 6px 0; }
+  table { width: 100%; border-collapse: collapse; }
+  td { padding: 12px 8px; border-bottom: 1px solid rgba(58, 42, 47, 0.1); vertical-align: top; }
+  td:first-child { font-family: 'Outfit'; font-weight: 700; width: 30%; }
+  @media print { body { padding: 24px; } h2 { margin-top: 32px; } }
+</style>
+</head>
+<body>
+  <section>
+    <p class="muted">Brand guide</p>
+    <h1>KIM GRACE<span class="squig">.</span></h1>
+    <p class="muted" style="margin-top:12px">Kim Grace Destriza. Web designer and WordPress developer.</p>
+  </section>
+
+  <section>
+    <h2>Colors</h2>
+    <div class="grid">
+      <div class="sw"><i style="background:#DDB8C2"></i><div><b>Blush (signature)</b>#DDB8C2 · RGB 221 184 194</div></div>
+      <div class="sw"><i style="background:#B9798B"></i><div><b>Rose</b>#B9798B · RGB 185 121 139</div></div>
+      <div class="sw"><i style="background:#94566A"></i><div><b>Deep Rose</b>#94566A · RGB 148 86 106</div></div>
+      <div class="sw"><i style="background:#F3E3E8"></i><div><b>Blush Mist</b>#F3E3E8 · RGB 243 227 232</div></div>
+      <div class="sw"><i style="background:#FFFFFF"></i><div><b>White</b>#FFFFFF</div></div>
+      <div class="sw"><i style="background:#151314"></i><div><b>Charcoal</b>#151314 · RGB 21 19 20</div></div>
+      <div class="sw"><i style="background:#232022"></i><div><b>Charcoal Card</b>#232022 · RGB 35 32 34</div></div>
+      <div class="sw"><i style="background:#3A2A2F"></i><div><b>Ink</b>#3A2A2F · RGB 58 42 47</div></div>
+      <div class="sw"><i style="background:#F4EFF1"></i><div><b>Off White</b>#F4EFF1 · RGB 244 239 241</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Color pairings</h2>
+    <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))">
+      <div class="pair" style="background:#151314;color:#F4EFF1"><span class="t">Dark <span style="color:#DDB8C2">mode</span></span><span class="pill" style="background:#DDB8C2;color:#1E1A1C;align-self:flex-start">Charcoal + Blush</span></div>
+      <div class="pair" style="background:#FFFFFF;color:#3A2A2F;border:1px solid rgba(58,42,47,.1)"><span class="t">Light <span style="color:#B9798B">mode</span></span><span class="pill" style="background:#B9798B;color:#FFFFFF;align-self:flex-start">White + Rose</span></div>
+      <div class="pair" style="background:#DDB8C2;color:#1E1A1C"><span class="t">Blush card</span><span class="pill" style="background:#FFFFFF;color:#94566A;align-self:flex-start">Blush + White</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Fonts</h2>
+    <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(320px, 1fr))">
+      <div class="font-card"><span class="muted">Headings, titles, name</span><p class="big" style="font-family:'Outfit';font-weight:800">Outfit</p><p>SemiBold 600 · Bold 700 · ExtraBold 800<br /><a href="https://fonts.google.com/specimen/Outfit" style="color:#94566A">Download from Google Fonts</a></p></div>
+      <div class="font-card"><span class="muted">Body text, captions, labels</span><p class="big" style="font-family:'Plus Jakarta Sans';font-weight:700">Plus Jakarta Sans</p><p>Regular 400 · Medium 500 · Bold 700<br /><a href="https://fonts.google.com/specimen/Plus+Jakarta+Sans" style="color:#94566A">Download from Google Fonts</a></p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Video text sizes (1080p)</h2>
+    <table>
+      <tr><td>Title</td><td>Outfit ExtraBold, 110 to 140 px</td></tr>
+      <tr><td>Subtitle</td><td>Outfit SemiBold, 56 to 64 px</td></tr>
+      <tr><td>Captions</td><td>Plus Jakarta Sans Bold, 52 to 60 px. Highlight key words in Blush on dark, Rose on light.</td></tr>
+      <tr><td>Lower third: name</td><td>Outfit ExtraBold, 48 px, all caps: KIM GRACE</td></tr>
+      <tr><td>Lower third: role</td><td>Plus Jakarta Sans Medium, 30 px</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>Video example</h2>
+    <div class="lt-wrap">
+      <p class="cap">I build websites that are <em>easy to update</em></p>
+      <div class="lt"><b>KIM GRACE</b><span>Web designer and WordPress developer</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Style rules</h2>
+    <ul>
+      <li>Rounded shapes: pill buttons and soft corners (24 to 44 px).</li>
+      <li>Soft wavy edges and hand-drawn squiggle underlines under key words.</li>
+      <li>Warm and friendly, not corporate.</li>
+      <li>Wear or use blush as the signature color so videos match the site.</li>
+      <li>No emojis or decorative symbols.</li>
+    </ul>
+  </section>
+</body>
+</html>

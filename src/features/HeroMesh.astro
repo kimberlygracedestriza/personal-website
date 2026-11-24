@@ -1,0 +1,21 @@
+---
+/* FEATURE: moving mesh gradient. Four soft color points loop through the corners on 15 to 20 s timers
+   so they never line up the same way twice. Colors: --mesh-1..4 in src/styles/tokens.css.
+   Remove: delete <HeroMesh /> in src/sections/Hero.astro and this file. */
+---
+<div class="mesh" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+<style>
+  .mesh { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; filter: blur(40px); }
+  .mesh i { position: absolute; left: 0; top: 0; width: 80vmax; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; animation: mesh-orbit linear infinite; }
+  .mesh i:nth-child(1) { background: radial-gradient(circle, var(--mesh-1), transparent 62%); animation-duration: 15s; }
+  .mesh i:nth-child(2) { background: radial-gradient(circle, var(--mesh-2), transparent 62%); animation-duration: 17s; animation-delay: -4.25s; }
+  .mesh i:nth-child(3) { background: radial-gradient(circle, var(--mesh-3), transparent 62%); animation-duration: 18.5s; animation-delay: -9.25s; }
+  .mesh i:nth-child(4) { background: radial-gradient(circle, var(--mesh-4), transparent 62%); animation-duration: 20s; animation-delay: -15s; }
+  @keyframes mesh-orbit {
+    0%, 100% { left: 0%; top: 0%; }
+    25% { left: 100%; top: 0%; }
+    50% { left: 100%; top: 100%; }
+    75% { left: 0%; top: 100%; }
+  }
+</style>

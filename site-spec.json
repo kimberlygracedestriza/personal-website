@@ -1,0 +1,127 @@
+{
+  "reference": {
+    "repo": "https://github.com/lohithadamisetti123/Peach-Portfolio",
+    "license": "MIT (code). Photos belong to the original author, not reused.",
+    "original_stack": "React 19, Vite, GSAP (ScrollTrigger, Draggable), Lenis smooth scroll",
+    "this_build_stack": "Plain HTML, CSS, JS. GSAP + ScrollTrigger + Draggable and Lenis loaded from CDN. No build step.",
+    "overall_feel": "Warm, friendly, scrapbook style single-page portfolio. Soft curved section edges, hand-drawn squiggle underlines that draw in on scroll, sticker and polaroid details, lots of small motion."
+  },
+  "design_tokens": {
+    "fonts": {
+      "display": "Outfit (headings, numbers, nav brand, buttons)",
+      "body": "Plus Jakarta Sans (paragraphs, labels, notes, chips)",
+      "note": "Reference used a third handwritten font (Caveat) for notes. Replaced with Outfit italic so only two fonts are used."
+    },
+    "type_scale_uniform": {
+      "rule": "Only five sizes exist on the whole site. Every section reuses them.",
+      "xs": "14px (chips, labels, captions, footer)",
+      "base": "16px (all body copy, buttons, nav links)",
+      "md": "22px (card titles, notes, role names)",
+      "lg": "clamp(40px, 5vw, 64px) (every section H2, big stats)",
+      "xl": "clamp(64px, 9vw, 128px) (hero name only)"
+    },
+    "colors": {
+      "white": "#FFFFFF (page background)",
+      "tint": "#FBF2F5 (alternate section background)",
+      "blush": "#DDB8C2 (coat color, sampled from photo)",
+      "blush_soft": "#F3E3E8 (light blush for blobs, boards, badges)",
+      "rose": "#B9798B (primary accent: buttons, highlights)",
+      "rose_dark": "#94566A (accent text, squiggles, hover)",
+      "ink": "#3A2A2F (main text)",
+      "muted": "rgba(58, 42, 47, 0.66) (secondary text)"
+    },
+    "shapes": {
+      "pills_and_buttons": "fully rounded, 99px radius",
+      "cards": "22 to 28px radius, soft long shadow",
+      "section_edges": "SVG wave on the top edge of each section, filled with that section's background"
+    }
+  },
+  "sections": [
+    {
+      "id": "loader",
+      "name": "Loader",
+      "layout": "Full-screen blush overlay, centered stack.",
+      "content": ["Round avatar", "Speech bubble: \"hi, it's Kim!\"", "Thin progress bar"],
+      "motion": "Avatar pops in with elastic scale, bubble pops after, bar fills. On load, items shrink out and the overlay slides up off screen, then the page unlocks scrolling."
+    },
+    {
+      "id": "nav",
+      "name": "Navigation",
+      "layout": "Floating pill bar at the top, centered, max 1200px wide.",
+      "content": ["Left: round avatar + lowercase name with accent dot", "Center: links About, Work, Journey, Toolbox, Milestones", "Right: rose pill button \"Let's chat\""],
+      "mobile": "Links collapse into a burger button that expands a sheet with large links plus Contact.",
+      "motion": "Slides down after the loader. Hover shows a small dot under each link. Links smooth-scroll to sections."
+    },
+    {
+      "id": "top",
+      "name": "Hero",
+      "layout": "Two columns. Left copy, right visual. Fills the first screen.",
+      "content": {
+        "left": ["Small note: \"Hi there, I'm\"", "Very large name with a squiggle underline", "Role in bold + one-line intro", "Row of 3 quick stats split by a top border", "Two buttons: \"See my work\" (filled) and \"Message me\" (outline)"],
+        "right": ["Organic blob shape in blush with a small rose circle", "Cut-out portrait placeholder sitting on the blob", "Rotated note: \"move your cursor, I'll look at it!\" with a hand-drawn arrow"]
+      },
+      "motion": "Name letters rise in one by one, squiggle draws, copy fades up, blob and portrait pop in. Portrait leans toward the cursor (reference swaps head-turn video frames; this build tilts a single placeholder). Visual has slight scroll parallax."
+    },
+    {
+      "id": "about",
+      "name": "About",
+      "background": "tint, wave edge",
+      "layout": "Two columns. Left photo stack, right copy.",
+      "content": {
+        "left": ["Fanned stack of 4 photo cards, each with caption \"I'm a\" + role", "Hint: \"click to see my other roles\""],
+        "right": ["Pill label \"About me\"", "H2 \"A little about me\" with squiggle", "Two short paragraphs", "2x2 grid of stat cards (big number + label)"]
+      },
+      "motion": "Clicking the stack flings the top card out and back to the bottom. Cards and stats rise in on scroll."
+    },
+    {
+      "id": "work",
+      "name": "Selected work",
+      "background": "white, wave edge",
+      "layout": "Header then 3 cards in a row (1 column on tablet and mobile).",
+      "content": ["Pill \"Selected work\"", "H2 \"Things I've made\"", "Note \"scroll to tidy up the table\"", "Each card: browser-window frame with 3 dots and fake URL, project image, number badge, tag, title, short text, tech chips, \"View project\" link"],
+      "motion": "Cards start scattered and rotated, then settle into a tidy row as you scroll (scrubbed)."
+    },
+    {
+      "id": "journey",
+      "name": "Journey",
+      "background": "white",
+      "layout": "Centered header, then a vertical timeline. Items alternate photo-left / card-right.",
+      "content": ["Pill \"My journey\"", "H2 \"The story so far\"", "Note \"follow the road\"", "Each item: taped polaroid with handwritten caption, center dot, card with year, title, organization, short text"],
+      "motion": "A dashed winding road links the dots. A solid line draws over it as you scroll and a small avatar travels along it. Polaroids and cards slide in."
+    },
+    {
+      "id": "skills",
+      "name": "Toolbox",
+      "background": "tint, wave edge",
+      "layout": "Header with note and Shuffle button on the right, then a dotted board.",
+      "content": ["Pill \"My toolbox\"", "H2 \"Things I'm good at\"", "Note \"psst, these stickers are draggable\"", "Board of skill stickers in 4 tones (rose, white, blush, ink)"],
+      "motion": "Stickers pop in, can be dragged anywhere inside the board, and Shuffle rearranges them with an elastic bounce."
+    },
+    {
+      "id": "milestones",
+      "name": "Milestones",
+      "background": "white, wave edge",
+      "layout": "Centered header, 4-column certificate wall, then a second header and 4-column numbers row.",
+      "content": ["Pill \"Milestones\"", "H2 \"Certificate wall\"", "Each frame: logo badge, certificate title, issuer, round check seal", "H2 \"By the numbers\"", "Each number: big value with suffix, accent line, label, note"],
+      "motion": "Frames drop in slightly rotated and straighten on hover. Numbers roll into place like an odometer, lines draw underneath."
+    },
+    {
+      "id": "contact",
+      "name": "Contact + footer",
+      "background": "tint, wave edge",
+      "layout": "Large rose card, two columns: copy left, cut-out sticker right.",
+      "content": ["Light pill \"Contact\"", "H2 \"Let's be friends!\"", "Short paragraph", "Email link + Copy button", "Buttons: Send an email, GitHub, LinkedIn", "Cut-out portrait placeholder with bubble \"say hi!\"", "Footer: copyright name + \"Back to top\""],
+      "motion": "Card rises in, sticker pops up and gently sways, bubble pops. Copy button shows \"Copied\" for 2 seconds."
+    }
+  ],
+  "images": {
+    "rule": "All images are local SVG placeholders in img/. Swap with real photos using the same file names.",
+    "files": {
+      "img/avatar.svg": "square, round avatar (loader, nav, journey walker)",
+      "img/cutout.svg": "transparent cut-out portrait (hero, contact)",
+      "img/photo-1.svg to photo-4.svg": "4:5 portraits (about stack, polaroids)",
+      "img/project-1.svg to project-3.svg": "4:3 project screenshots"
+    }
+  },
+  "placeholders_to_confirm": ["[CONFIRM: real email]", "[CONFIRM: GitHub and LinkedIn URLs]", "[CONFIRM: stats, projects, journey dates, certificates]"]
+}

@@ -1,0 +1,14 @@
+---
+/* Curved top edge for a section. Place it first inside a `.section`; it takes that section's background. */
+interface Props { flip?: boolean }
+const { flip = false } = Astro.props
+---
+<svg class:list={['wave', { flip }]} viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0 120 L0 64 C 180 10, 360 6, 540 40 S 900 112, 1080 76 S 1340 14, 1440 40 L1440 120 Z" />
+</svg>
+
+<style>
+  .wave { position: absolute; left: 0; top: 1px; width: 100%; height: clamp(46px, 7vw, 110px); transform: translateY(-100%); pointer-events: none; display: block; filter: drop-shadow(0 -5px 6px rgba(58, 42, 47, 0.045)); }
+  .wave.flip { transform: translateY(-100%) scaleX(-1); }
+  .wave path { fill: var(--sec-bg); }
+</style>

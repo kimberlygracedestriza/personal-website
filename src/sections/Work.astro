@@ -1,0 +1,93 @@
+---
+/* SECTION: selected work. Project cards (every 3rd one wide) that start scattered and tidy up as you scroll.
+   Remove: delete its line in src/config/sections.ts (and this file). */
+import Squiggle from '../components/Squiggle.astro'
+import Wave from '../components/Wave.astro'
+
+interface Props { id: string }
+const { id } = Astro.props
+
+const projects = [
+  { title: 'Bloom Wellness', tag: 'WordPress · Booking', image: '/img/project-1.svg', text: 'A calm, booking-first site for a wellness studio with online scheduling and service pages.', tech: ['WordPress', 'Elementor', 'Booking'], link: '#', color: '#F3E3E8', badge: 'Live site' },
+  { title: 'Harbor Dental', tag: 'Redesign · SEO', image: '/img/project-2.svg', text: 'A full redesign that made services easy to find and doubled contact form leads.', tech: ['WordPress', 'Gutenberg', 'Yoast'], link: '#', color: '#EBD3DA', metric: '2x contact leads' },
+  { title: 'Maple Bakery', tag: 'WooCommerce', image: '/img/project-3.svg', text: 'An online shop for pre-orders and pickup slots, built so the owner can update it in minutes.', tech: ['WooCommerce', 'Figma', 'Stripe'], link: '#', color: '#F8EDF0', metric: '[CONFIRM: result]' },
+  { title: '[CONFIRM: project 4]', tag: 'WordPress · Portal', image: '/img/project-1.svg', text: '[CONFIRM: one line about what you built and the result.]', tech: ['WordPress'], link: '#', color: '#EBD3DA' },
+] as { title: string; tag: string; image: string; text: string; tech: string[]; link: string; color: string; badge?: string; metric?: string }[]
+// every 3rd card (1st, 4th, ...) is wide; every other wide card puts the text on the right
+const wide = (i: number) => i % 3 === 0
+const flip = (i: number) => wide(i) && Math.floor(i / 3) % 2 === 1
+---
+
+<section class="work section" id={id}>
+  <Wave flip />
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="pill">Selected work</span>
+      <h2 class="h2">Things I've <span class="hl">made<Squiggle /></span></h2>
+      <p class="note sec-note">scroll to tidy up the table</p>
+    </div>
+    <div class="wk-cards">
+      {projects.map((p, i) => (
+        <article class:list={['wk-card', { 'wk-wide': wide(i), 'wk-flip': flip(i) }]}>
+          <div class="wk-art" style={`background:${p.color}`}>
+            <img src={p.image} alt={p.title} loading="lazy" />
+            {p.badge && <span class="wk-badge">{p.badge}</span>}
+          </div>
+          <div class="wk-body">
+            <span class="wk-tag">{p.tag}</span>
+            <h3>{p.title}</h3>
+            <p>{p.text}</p>
+            <div class="wk-foot">
+              {p.metric && !wide(i) && <span class="wk-metric">{p.metric}</span>}
+              <a class="wk-link" href={p.link}>View project</a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .wk-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .wk-card { display: flex; flex-direction: column; background: var(--surface); border-radius: 28px; padding: 22px; box-shadow: var(--shadow); border: 1px solid var(--line); transition: box-shadow 0.4s; will-change: transform; }
+  .wk-card:hover { box-shadow: 0 30px 70px -24px rgba(185, 121, 139, 0.5); }
+  .wk-wide { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1.05fr; align-items: center; gap: clamp(24px, 4vw, 56px); padding: clamp(22px, 3vw, 32px); }
+  .wk-wide .wk-body { order: -1; padding-inline: 10px; }
+  .wk-wide.wk-flip .wk-body { order: 0; }
+  .wk-art { position: relative; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden; }
+  .wk-wide .wk-art { aspect-ratio: 4 / 3; }
+  .wk-art img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
+  .wk-card:hover .wk-art img { transform: scale(1.04); }
+  .wk-badge { position: absolute; top: 14px; right: 14px; padding: 5px 12px; border-radius: 99px; background: var(--bg); color: var(--ink); font-size: var(--fs-xs); font-weight: 600; }
+  .wk-body { flex: 1; padding: 20px 4px 0; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+  .wk-wide .wk-body { padding-top: 0; }
+  .wk-tag { padding: 4px 12px; border-radius: 99px; background: var(--blush-soft); color: var(--rose-d); font-size: var(--fs-xs); font-weight: 600; }
+  .wk-body h3 { font-family: var(--display); font-weight: 800; font-size: var(--fs-md); line-height: 1.15; }
+  .wk-body p { color: var(--muted); }
+  .wk-foot { margin-top: auto; padding-top: 12px; width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .wk-metric { font-weight: 700; }
+  .wk-link { font-weight: 700; color: var(--rose-d); display: inline-flex; gap: 6px; border-bottom: 2px solid currentColor; padding-bottom: 2px; transition: gap 0.3s; }
+  .wk-link:hover { gap: 12px; }
+
+  @media (max-width: 1000px) {
+    .wk-cards, .wk-wide { grid-template-columns: minmax(0, 1fr); }
+    .wk-wide .wk-body, .wk-wide.wk-flip .wk-body { order: 1; padding-inline: 4px; }
+  }
+</style>
+
+<script>
+  import { gsap } from '../lib/motion'
+  const cards = gsap.utils.toArray<HTMLElement>('.wk-card')
+  const scatter = [{ x: 90, y: 60, r: -9 }, { x: 0, y: 140, r: 7 }, { x: -90, y: 40, r: -5 }]
+  const mm = gsap.matchMedia()
+  mm.add('(min-width: 1001px)', () => {
+    cards.forEach((c, i) => {
+      const s = scatter[i % 3]
+      gsap.fromTo(c, { x: s.x, y: s.y, rotate: s.r }, { x: 0, y: 0, rotate: 0, ease: 'none', scrollTrigger: { trigger: '.wk-cards', start: 'top 95%', end: 'top 35%', scrub: 0.6 } })
+    })
+  })
+  mm.add('(max-width: 1000px)', () => {
+    cards.forEach((c, i) => gsap.from(c, { y: 60, rotate: i % 2 ? 4 : -4, opacity: 0, duration: 1, scrollTrigger: { trigger: c, start: 'top 88%' } }))
+  })
+</script>
