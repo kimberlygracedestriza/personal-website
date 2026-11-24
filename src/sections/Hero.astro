@@ -9,9 +9,9 @@ interface Props { id: string }
 const { id } = Astro.props
 
 const bgWord = 'WORDPRESS DEVELOPER'
-const intro = 'I design and build clear, fast websites for small businesses and service providers, from the first sketch to launch day.'
+const intro = 'I help businesses build their websites and an automated systems that turn inquiries into bookings and sales.'
 const counts = [
-  { value: '40+', label: 'sites launched' },
+  { value: '8+', label: 'sites launched' },
   { value: '3', label: 'years freelancing' },
   { value: '3', label: 'time zones' },
 ]
@@ -30,8 +30,6 @@ const booking = site.booking
         <Squiggle manual />
       </h1>
       <p class="hr-sub">
-        <b>{site.role}</b>
-        <svg class="spark" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c.8 6.4 3.6 9.6 12 12-8.4 2.4-11.2 5.6-12 12-.8-6.4-3.6-9.6-12-12C8.4 9.6 11.2 6.4 12 0z" /></svg>
         {intro}
       </p>
       <ul class="hr-counts" aria-label="Highlights">
@@ -61,8 +59,6 @@ const booking = site.booking
   .ch-mask { display: inline-block; overflow: hidden; padding: 0.04em 0.01em 0.06em; margin: -0.04em -0.01em -0.06em; }
   .ch { display: inline-block; }
   .hr-sub { max-width: 30em; color: var(--muted); }
-  .hr-sub b { color: var(--ink); font-weight: 700; }
-  .spark { width: 0.8em; height: 0.8em; display: inline-block; vertical-align: -0.05em; fill: var(--rose); margin: 0 4px; }
   .hr-counts { display: flex; gap: clamp(22px, 3vw, 44px); margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--line); max-width: 30em; }
   .hr-counts li { display: flex; flex-direction: column; }
   .hr-counts b { font-family: var(--display); font-weight: 800; font-size: var(--fs-md); line-height: 1.2; }
