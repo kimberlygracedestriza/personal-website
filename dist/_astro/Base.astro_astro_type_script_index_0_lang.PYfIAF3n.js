@@ -1,1 +1,0 @@
-import{n as e,r as t,t as n}from"./motion.C1Yswhnh.js";n(),document.addEventListener(`click`,t=>{let n=t.target.closest(`a[href^="#"]`);n&&(t.preventDefault(),dispatchEvent(new Event(`site:navigate`)),e(n.getAttribute(`href`)))}),document.getElementById(`loader`)||t();
