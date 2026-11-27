@@ -9,7 +9,7 @@ const { id } = Astro.props
 
 const projects = [
   { title: 'Urpal Care Services', tag: 'WordPress · Healthcare Provider', image: '/img/urpal-care.webp', text: ' A booking-first site for a NDIS Service Provider in Melbourne, Australia with online scheduling and service pages.', tech: ['WordPress', 'Elementor', 'Booking'], link: 'https://urpalcareservices.com.au/', color: '#F3E3E8', badge: 'Live site' },
-  { title: 'DM Martin Manufacturing', tag: 'Redesign · Dealer Portal', image: '/img/DM-Martin-redesigned.webp', text: 'A full redesign website to showcase their trailer, merger, and commodity boxes equipment. The site contains Build and Quote Form for retailers and a dealer portal for dealers.', tech: ['WordPress', 'Elementor', 'Custom CSS and Javascript'], link: '#', color: '#EBD3DA', metric: 'Receive more inquiries and a systemized dealer portal' },
+  { title: 'DM Martin Manufacturing', tag: 'Redesign · Dealer Portal', image: '/img/DM-Martin-portal.webp', text: 'A full redesign website to showcase their trailer, merger, and commodity boxes equipment. The site contains Build and Quote Form for retailers and a dealer portal for dealers.', tech: ['WordPress', 'Elementor', 'Custom CSS and Javascript'], link: '#', color: '#EBD3DA', metric: 'Receive more inquiries and a systemized dealer portal' },
   { title: 'Maple Bakery', tag: 'WooCommerce', image: '/img/project-3.svg', text: 'An online shop for pre-orders and pickup slots, built so the owner can update it in minutes.', tech: ['WooCommerce', 'Figma', 'Stripe'], link: '#', color: '#F8EDF0', metric: '[CONFIRM: result]' },
   { title: '[CONFIRM: project 4]', tag: 'WordPress · Portal', image: '/img/project-1.svg', text: '[CONFIRM: one line about what you built and the result.]', tech: ['WordPress'], link: '#', color: '#EBD3DA' },
 ] as { title: string; tag: string; image: string; text: string; tech: string[]; link: string; color: string; badge?: string; metric?: string }[]
@@ -57,7 +57,7 @@ const flip = (i: number) => wide(i) && Math.floor(i / 3) % 2 === 1
   .wk-wide.wk-flip .wk-body { order: 0; }
   .wk-art { position: relative; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden; }
   .wk-wide .wk-art { aspect-ratio: 4 / 3; }
-  .wk-art img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
+  .wk-art img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.6s var(--ease); }
   .wk-card:hover .wk-art img { transform: scale(1.04); }
   .wk-badge { position: absolute; top: 14px; right: 14px; padding: 5px 12px; border-radius: 99px; background: var(--bg); color: var(--ink); font-size: var(--fs-xs); font-weight: 600; }
   .wk-body { flex: 1; padding: 20px 4px 0; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
