@@ -12,7 +12,7 @@ export const sections: Section[] = [
   { file: 'About', id: 'about', nav: 'About' },
   { file: 'Journey', id: 'journey', nav: 'Journey' },
   { file: 'Skills', id: 'skills', nav: 'Toolbox' },
-  { file: 'Milestones', id: 'milestones', nav: 'Milestones' },
+  // { file: 'Milestones', id: 'milestones', nav: 'Milestones' },
   { file: 'Contact', id: 'contact' },
   { file: 'Footer', id: 'footer' },
 ]
