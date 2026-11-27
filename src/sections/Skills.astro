@@ -8,8 +8,7 @@ interface Props { id: string }
 const { id } = Astro.props
 
 const skills = [
-  'Healthcare', 'Manufacturing', 'Landscaping', 'Construction', 'Non-profit Organizations', 'HTML', 'CSS', 'JavaScript',
-  'Sports', "Restaurant', 'Dental Clinic', 'Coffee Shop',
+  'Healthcare', 'Manufacturing', 'Landscaping', 'Construction', 'Non-profit Organizations', 'Sports', 'Restaurant', 'Dental Clinic', 'Coffee Shop',
 ]
 const tones = ['rose', 'white', 'blush', 'ink', 'white', 'blush']
 ---
@@ -19,10 +18,10 @@ const tones = ['rose', 'white', 'blush', 'ink', 'white', 'blush']
     <div class="sec-head sk-head">
       <div>
         <span class="pill">Industries</span>
-        <h2 class="h2">Industries I<span class="hl">served<Squiggle /></span></h2>
+        <h2 class="h2">Industries I <span class="hl">served<Squiggle /></span></h2>
       </div>
       <div class="sk-side">
-        /* <p class="note sec-note">psst, these stickers are draggable</p> */
+        {/* <p class="note sec-note">psst, these stickers are draggable</p> */}
         <button class="btn btn-line sk-shuffle">Shuffle</button>
       </div>
     </div>
